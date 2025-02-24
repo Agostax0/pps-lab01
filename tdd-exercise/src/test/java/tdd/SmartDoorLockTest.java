@@ -36,4 +36,25 @@ public class SmartDoorLockTest {
         assertFalse(smartDoorLock.isLocked());
     }
 
+    private int generateCorrectPin(){
+        return (int) (SmartDoorLockImpl.MIN_PIN_ALLOWED + Math.random() * SmartDoorLockImpl.MAX_PIN_ALLOWED - SmartDoorLockImpl.MIN_PIN_ALLOWED);
+    }
+
+    @Test
+    public void setCorrectPin(){
+        assertDoesNotThrow(() -> smartDoorLock.setPin(generateCorrectPin()));
+    }
+
+    @Test
+    public void setWrongPinUnderLowerBound(){
+        int wrongPin = SmartDoorLockImpl.MIN_PIN_ALLOWED - 1;
+        assertThrows(IllegalPinException.class, () -> smartDoorLock.setPin(wrongPin));
+    }
+
+    @Test
+    public void setWrongPinOverUpperBound(){
+        int wrongPin = SmartDoorLockImpl.MAX_PIN_ALLOWED + 1;
+        assertThrows(IllegalPinException.class, () -> smartDoorLock.setPin(wrongPin));
+    }
+
 }

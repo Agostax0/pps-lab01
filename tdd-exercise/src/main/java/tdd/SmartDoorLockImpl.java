@@ -4,9 +4,18 @@ public class SmartDoorLockImpl implements SmartDoorLock {
 
     private boolean isLocked = false;
     private Integer pin = null;
+    public final static int MIN_PIN_ALLOWED = 1000;
+    public final static int MAX_PIN_ALLOWED = 9999;
+
 
     @Override
     public void setPin(int pin) {
+        if(pin >= MIN_PIN_ALLOWED && pin <= MAX_PIN_ALLOWED){
+            this.pin = pin;
+        }
+        else{
+            throw new IllegalPinException();
+        }
 
     }
 
