@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class SmartDoorLockTest {
 
     private SmartDoorLock smartDoorLock;
+    private static int INITIAL_FAILED_ATTEMPTS = 0;
 
     @BeforeEach
     void beforeEach(){
@@ -22,5 +23,10 @@ public class SmartDoorLockTest {
     @Test
     public void isInitiallyNotBlocked(){
         assertFalse(smartDoorLock.isBlocked());
+    }
+
+    @Test
+    public void initialFailedAttempts(){
+        assertEquals(INITIAL_FAILED_ATTEMPTS, smartDoorLock.getFailedAttempts());
     }
 }
