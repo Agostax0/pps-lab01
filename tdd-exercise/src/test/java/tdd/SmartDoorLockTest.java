@@ -65,4 +65,26 @@ public class SmartDoorLockTest {
         assertTrue(smartDoorLock.isLocked());
     }
 
+    @Test
+    public void tryUnlockWithCorrectPin(){
+        int correctPin = generateCorrectPin();
+        smartDoorLock.setPin(correctPin);
+        smartDoorLock.lock();
+
+        smartDoorLock.unlock(correctPin);
+        assertFalse(smartDoorLock.isLocked());
+    }
+
+    @Test
+    public void tryUnlockWithWrongPin(){
+        int firstPin = SmartDoorLockImpl.MIN_PIN_ALLOWED;
+        int secondPin = SmartDoorLockImpl.MIN_PIN_ALLOWED + 1;
+
+        smartDoorLock.setPin(firstPin);
+        smartDoorLock.lock();
+
+        smartDoorLock.unlock(secondPin);
+        assertTrue(smartDoorLock.isLocked());
+    }
+
 }
