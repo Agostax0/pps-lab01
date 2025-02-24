@@ -3,12 +3,15 @@ package tdd;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Random;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class SmartDoorLockTest {
 
     private SmartDoorLock smartDoorLock;
     private static int INITIAL_FAILED_ATTEMPTS = 0;
+    private final static Random RANDOM = new Random();
 
     @BeforeEach
     void beforeEach(){
@@ -37,7 +40,7 @@ public class SmartDoorLockTest {
     }
 
     private int generateCorrectPin(){
-        return (int) (SmartDoorLockImpl.MIN_PIN_ALLOWED + Math.random() * (SmartDoorLockImpl.MAX_PIN_ALLOWED - SmartDoorLockImpl.MIN_PIN_ALLOWED));
+        return RANDOM.nextInt(SmartDoorLockImpl.MIN_PIN_ALLOWED, SmartDoorLockImpl.MAX_PIN_ALLOWED + 1);
     }
 
     @Test
