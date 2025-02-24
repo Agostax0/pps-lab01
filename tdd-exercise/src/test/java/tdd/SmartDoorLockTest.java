@@ -111,4 +111,16 @@ public class SmartDoorLockTest {
         }
         assertTrue(smartDoorLock.isBlocked());
     }
+
+    @Test
+    public void decreasingMaxAttempts(){
+        for(int times = 0; times < SmartDoorLockImpl.MAX_FAILED_ATTEMPTS; times++){
+            final int expectedRemainingAttempts = SmartDoorLockImpl.MAX_FAILED_ATTEMPTS - times;
+            assertEquals(expectedRemainingAttempts, smartDoorLock.getMaxAttempts());
+
+            failUnlock();
+        }
+    }
+
+
 }
