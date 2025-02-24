@@ -57,4 +57,12 @@ public class SmartDoorLockTest {
         assertThrows(IllegalPinException.class, () -> smartDoorLock.setPin(wrongPin));
     }
 
+    @Test
+    public void tryLockWithCorrectPin(){
+        int correctPin = generateCorrectPin();
+        smartDoorLock.setPin(correctPin);
+        smartDoorLock.lock();
+        assertTrue(smartDoorLock.isLocked());
+    }
+
 }
