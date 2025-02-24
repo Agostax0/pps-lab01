@@ -87,4 +87,21 @@ public class SmartDoorLockTest {
         assertTrue(smartDoorLock.isLocked());
     }
 
+    private void failUnlock(){
+        int correctPin = generateCorrectPin();
+        int wrongPin = SmartDoorLockImpl.MAX_PIN_ALLOWED + 1;
+
+        smartDoorLock.setPin(correctPin);
+        smartDoorLock.lock();
+        smartDoorLock.unlock(wrongPin);
+    }
+
+    @Test
+    public void failedAttempt(){
+        int failedAttempts = INITIAL_FAILED_ATTEMPTS;
+        failUnlock();
+        failedAttempts += 1;
+        assertEquals(failedAttempts, smartDoorLock.getFailedAttempts());
+    }
+
 }
