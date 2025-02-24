@@ -37,7 +37,7 @@ public class SmartDoorLockTest {
     }
 
     private int generateCorrectPin(){
-        return (int) (SmartDoorLockImpl.MIN_PIN_ALLOWED + Math.random() * SmartDoorLockImpl.MAX_PIN_ALLOWED - SmartDoorLockImpl.MIN_PIN_ALLOWED);
+        return (int) (SmartDoorLockImpl.MIN_PIN_ALLOWED + Math.random() * (SmartDoorLockImpl.MAX_PIN_ALLOWED - SmartDoorLockImpl.MIN_PIN_ALLOWED));
     }
 
     @Test
@@ -104,4 +104,11 @@ public class SmartDoorLockTest {
         assertEquals(failedAttempts, smartDoorLock.getFailedAttempts());
     }
 
+    @Test
+    public void blockSmartLock(){
+        for(int times = 0; times < SmartDoorLockImpl.MAX_FAILED_ATTEMPTS; times++){
+            failUnlock();
+        }
+        assertTrue(smartDoorLock.isBlocked());
+    }
 }

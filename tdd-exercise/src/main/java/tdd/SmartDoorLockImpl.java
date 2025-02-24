@@ -7,6 +7,8 @@ public class SmartDoorLockImpl implements SmartDoorLock {
     public final static int MIN_PIN_ALLOWED = 1000;
     public final static int MAX_PIN_ALLOWED = 9999;
     private int failedAttempts = 0;
+    public final static int MAX_FAILED_ATTEMPTS = 10;
+    private boolean isBlocked = false;
 
 
     @Override
@@ -26,6 +28,8 @@ public class SmartDoorLockImpl implements SmartDoorLock {
             this.isLocked = false;
         else
             this.failedAttempts++;
+
+        if(this.failedAttempts >= MAX_FAILED_ATTEMPTS) this.isBlocked = true;
     }
 
     @Override
@@ -40,12 +44,12 @@ public class SmartDoorLockImpl implements SmartDoorLock {
 
     @Override
     public boolean isBlocked() {
-        return false;
+        return this.isBlocked;
     }
 
     @Override
     public int getMaxAttempts() {
-        return 0;
+        return MAX_FAILED_ATTEMPTS - this.failedAttempts;
     }
 
     @Override
