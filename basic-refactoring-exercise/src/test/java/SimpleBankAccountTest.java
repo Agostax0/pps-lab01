@@ -1,5 +1,6 @@
 import example.model.AccountHolder;
 import example.model.BankAccount;
+import example.model.IllegalTransactionException;
 import example.model.SimpleBankAccount;
 
 import org.junit.jupiter.api.*;
@@ -44,21 +45,34 @@ class SimpleBankAccountTest {
     }
 
     @Test
-    void testWithdraw() {
-        final int withdrawAmount = 70;
+    void testWithdrawWithFee(){
+        final int withdrawAmount = 50;
 
         bankAccount.deposit(accountHolder.getId(), INITIAL_DEPOSIT);
         bankAccount.withdraw(accountHolder.getId(), withdrawAmount);
-        assertEquals(INITIAL_DEPOSIT - withdrawAmount, bankAccount.getBalance());
+
+        final int expectedBalance = INITIAL_BALANCE + INITIAL_DEPOSIT - withdrawAmount - SimpleBankAccount.WITHDRAW_FEE;
+
+        assertEquals(expectedBalance, bankAccount.getBalance());
     }
 
     @Test
-    void testWrongWithdraw() {
-        final int differentUserId = 2;
-        final int withdrawAmount = 70;
+    void testFailedWithdraw(){
+        bankAccount.deposit(accountHolder.getId(), INITIAL_DEPOSIT);
+        assertThrows(IllegalTransactionException.class, () -> bankAccount.withdraw(accountHolder.getId(), INITIAL_DEPOSIT));
+    }
+
+    @Test
+    void testWrongWithdrawWithFee(){
+        final int wrongUserId = 2;
+        final int withdrawAmount = 50;
 
         bankAccount.deposit(accountHolder.getId(), INITIAL_DEPOSIT);
-        bankAccount.withdraw(differentUserId, withdrawAmount);
-        assertEquals(INITIAL_DEPOSIT, bankAccount.getBalance());
+        bankAccount.withdraw(wrongUserId, withdrawAmount);
+        bankAccount.withdraw(accountHolder.getId(), withdrawAmount);
+
+        final int expectedBalance = INITIAL_BALANCE + INITIAL_DEPOSIT - withdrawAmount - SimpleBankAccount.WITHDRAW_FEE;
+
+        assertEquals(expectedBalance, bankAccount.getBalance());
     }
 }
