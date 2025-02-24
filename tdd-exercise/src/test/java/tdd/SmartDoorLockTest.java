@@ -29,4 +29,11 @@ public class SmartDoorLockTest {
     public void initialFailedAttempts(){
         assertEquals(INITIAL_FAILED_ATTEMPTS, smartDoorLock.getFailedAttempts());
     }
+
+    @Test
+    public void failedLockWithNoPin(){
+        smartDoorLock.lock();
+        assertFalse(smartDoorLock.isLocked());
+    }
+
 }
