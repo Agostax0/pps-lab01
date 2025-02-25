@@ -29,4 +29,9 @@ class MinMaxStackImplTest {
     public void initialPopThrowsException(){
         assertThrows(IllegalStateException.class, () -> this.stack.pop());
     }
+
+    @Test
+    public void initialPeekThrowsException(){
+        assertThrows(IllegalStateException.class, () -> this.stack.peek());
+    }
 }

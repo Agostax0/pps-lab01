@@ -18,6 +18,8 @@ public class MinMaxStackImpl implements MinMaxStack {
 
     @Override
     public int peek() {
+        if(this.empty) throw new IllegalStateException();
+
         return 0;
     }
 
