@@ -9,16 +9,20 @@ public class MinMaxStackImpl implements MinMaxStack {
 
     }
 
+    private void checkEmptyStack() {
+        if(this.empty) throw new IllegalStateException();
+    }
+
     @Override
     public int pop() {
-        if(this.empty) throw new IllegalStateException();
+        checkEmptyStack();
 
         return 0;
     }
 
     @Override
     public int peek() {
-        if(this.empty) throw new IllegalStateException();
+        checkEmptyStack();
 
         return 0;
     }
