@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class MinMaxStackImplTest {
 
     private MinMaxStack stack;
+    private static int INITIAL_SIZE = 0;
 
     @BeforeEach
     public void beforeEach(){
@@ -17,5 +18,10 @@ class MinMaxStackImplTest {
     @Test
     public void isInitiallyEmpty() {
         assertTrue(this.stack.isEmpty());
+    }
+
+    @Test
+    public void isSizeInitiallyZero(){
+        assertEquals(INITIAL_SIZE, this.stack.size());
     }
 }
