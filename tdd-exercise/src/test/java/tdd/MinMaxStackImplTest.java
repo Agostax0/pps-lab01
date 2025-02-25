@@ -24,4 +24,9 @@ class MinMaxStackImplTest {
     public void isSizeInitiallyZero(){
         assertEquals(INITIAL_SIZE, this.stack.size());
     }
+
+    @Test
+    public void initialPop(){
+        assertThrows(IllegalStateException.class, () -> this.stack.pop());
+    }
 }
