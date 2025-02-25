@@ -130,5 +130,24 @@ public class SmartDoorLockTest {
         }
     }
 
+    @Test
+    public void correctResetIfLocked(){
+        lockSmartDoorLock(generateCorrectPin());
+        smartDoorLock.reset();
+        assertFalse(smartDoorLock.isLocked());
+    }
 
+    @Test
+    public void correctResetIfBlocked(){
+        blockSmartLock();
+        smartDoorLock.reset();
+        assertFalse(smartDoorLock.isBlocked());
+    }
+    @Test
+    public void correctResetOfPin() {
+        final int originalPin = generateCorrectPin();
+        lockSmartDoorLock(originalPin);
+        smartDoorLock.reset();
+        assertThrows(IllegalArgumentException.class, () -> smartDoorLock.lock());
+    }
 }
