@@ -29,6 +29,8 @@ public class MinMaxStackImpl implements MinMaxStack {
 
     @Override
     public int getMin() {
+        checkEmptyStack();
+
         return 0;
     }
 
