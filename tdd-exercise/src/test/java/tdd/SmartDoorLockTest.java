@@ -35,8 +35,7 @@ public class SmartDoorLockTest {
 
     @Test
     public void failedLockWithNoPin(){
-        smartDoorLock.lock();
-        assertFalse(smartDoorLock.isLocked());
+        assertThrows(IllegalArgumentException.class, () -> smartDoorLock.lock());
     }
 
     private int generateCorrectPin(){

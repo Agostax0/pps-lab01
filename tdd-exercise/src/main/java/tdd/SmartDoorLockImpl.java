@@ -34,7 +34,7 @@ public class SmartDoorLockImpl implements SmartDoorLock {
 
     @Override
     public void lock() {
-        if(pin != null) this.isLocked = true;
+        if(pin != null) this.isLocked = true; else throw new IllegalArgumentException();
     }
 
     @Override
