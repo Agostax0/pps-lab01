@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class SmartDoorLockTest {
 
     private SmartDoorLock smartDoorLock;
-    private static int INITIAL_FAILED_ATTEMPTS = 0;
+    private static final int INITIAL_FAILED_ATTEMPTS = 0;
     private final static Random RANDOM = new Random();
 
     @BeforeEach
@@ -60,19 +60,22 @@ public class SmartDoorLockTest {
         assertThrows(IllegalPinException.class, () -> smartDoorLock.setPin(wrongPin));
     }
 
+    private void lockSmartDoorLock(int pin) {
+        smartDoorLock.setPin(pin);
+        smartDoorLock.lock();
+    }
+
     @Test
     public void tryLockWithCorrectPin(){
         int correctPin = generateCorrectPin();
-        smartDoorLock.setPin(correctPin);
-        smartDoorLock.lock();
+        lockSmartDoorLock(correctPin);
         assertTrue(smartDoorLock.isLocked());
     }
 
     @Test
     public void tryUnlockWithCorrectPin(){
         int correctPin = generateCorrectPin();
-        smartDoorLock.setPin(correctPin);
-        smartDoorLock.lock();
+        lockSmartDoorLock(correctPin);
 
         smartDoorLock.unlock(correctPin);
         assertFalse(smartDoorLock.isLocked());
@@ -83,8 +86,7 @@ public class SmartDoorLockTest {
         int firstPin = SmartDoorLockImpl.MIN_PIN_ALLOWED;
         int secondPin = SmartDoorLockImpl.MIN_PIN_ALLOWED + 1;
 
-        smartDoorLock.setPin(firstPin);
-        smartDoorLock.lock();
+        lockSmartDoorLock(firstPin);
 
         smartDoorLock.unlock(secondPin);
         assertTrue(smartDoorLock.isLocked());
@@ -94,8 +96,7 @@ public class SmartDoorLockTest {
         int correctPin = generateCorrectPin();
         int wrongPin = SmartDoorLockImpl.MAX_PIN_ALLOWED + 1;
 
-        smartDoorLock.setPin(correctPin);
-        smartDoorLock.lock();
+        lockSmartDoorLock(correctPin);
         smartDoorLock.unlock(wrongPin);
     }
 
@@ -107,11 +108,15 @@ public class SmartDoorLockTest {
         assertEquals(failedAttempts, smartDoorLock.getFailedAttempts());
     }
 
-    @Test
-    public void blockSmartLock(){
+    private void blockSmartLock() {
         for(int times = 0; times < SmartDoorLockImpl.MAX_FAILED_ATTEMPTS; times++){
             failUnlock();
         }
+    }
+
+    @Test
+    public void doesSmartLockBlock(){
+        blockSmartLock();
         assertTrue(smartDoorLock.isBlocked());
     }
 
