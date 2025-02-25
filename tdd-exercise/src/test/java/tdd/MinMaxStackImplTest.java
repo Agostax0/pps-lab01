@@ -39,4 +39,9 @@ class MinMaxStackImplTest {
     public void initialGetMinThrowsException(){
         assertThrows(IllegalStateException.class, () -> this.stack.getMin());
     }
+
+    @Test
+    public void initialGetMaxThrowsException(){
+        assertThrows(IllegalStateException.class, () -> this.stack.getMax());
+    }
 }
