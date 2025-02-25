@@ -15,7 +15,7 @@ class MinMaxStackImplTest {
     }
 
     @Test
-    public void todo() {
-        assertTrue(true);
+    public void isInitiallyEmpty() {
+        assertTrue(this.stack.isEmpty());
     }
 }
