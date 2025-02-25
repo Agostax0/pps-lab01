@@ -2,7 +2,7 @@ package tdd;
 
 public class MinMaxStackImpl implements MinMaxStack {
 
-    private boolean isEmpty = true;
+    private boolean empty = true;
 
     @Override
     public void push(int value) {
@@ -31,7 +31,7 @@ public class MinMaxStackImpl implements MinMaxStack {
 
     @Override
     public boolean isEmpty() {
-        return this.isEmpty;
+        return this.empty;
     }
 
     @Override
