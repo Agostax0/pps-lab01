@@ -19,6 +19,8 @@ class MinMaxStackImplTest {
             3, 1, 1, 6, 2, 5, 8, 7, 10, 9
             )
     );
+    private final static int MAX_EXAMPLE_VALUE = Collections.max(EXAMPLE_VALUES);
+    private static int MIN_EXAMPLE_VALUE = Collections.min(EXAMPLE_VALUES);
 
     @BeforeEach
     public void beforeEach(){
@@ -73,9 +75,8 @@ class MinMaxStackImplTest {
 
     @Test
     public void popValueIsMax(){
-        final int maxValueAdded = Collections.max(EXAMPLE_VALUES);
         fillStackWithExampleValues();
-        assertEquals(maxValueAdded, this.stack.pop());
+        assertEquals(MAX_EXAMPLE_VALUE, this.stack.pop());
     }
 
     @Test
@@ -92,9 +93,8 @@ class MinMaxStackImplTest {
 
     @Test
     public void peekValueIsMax(){
-        final int maxValueAdded = Collections.max(EXAMPLE_VALUES);
         fillStackWithExampleValues();
-        assertEquals(maxValueAdded, this.stack.peek());
+        assertEquals(MAX_EXAMPLE_VALUE, this.stack.peek());
     }
 
     @Test
@@ -106,17 +106,13 @@ class MinMaxStackImplTest {
 
     @Test
     public void getMax(){
-        final int maxValueAdded = Collections.max(EXAMPLE_VALUES);
         fillStackWithExampleValues();
-
-        assertEquals(maxValueAdded, this.stack.getMax());
+        assertEquals(MAX_EXAMPLE_VALUE, this.stack.getMax());
     }
 
     @Test
     public void getMin(){
-        final int minValueAdded = Collections.min(EXAMPLE_VALUES);
         fillStackWithExampleValues();
-
-        assertEquals(minValueAdded, this.stack.getMin());
+        assertEquals(MIN_EXAMPLE_VALUE, this.stack.getMin());
     }
 }
