@@ -49,7 +49,6 @@ public class CircularListTest {
             this.queue.add(randomExampleElement);
             elementsAdded++;
         }
-
         assertEquals(CircularQueueImpl.MAX_CAPACITY, this.queue.size());
     }
 
@@ -62,9 +61,7 @@ public class CircularListTest {
     public void sizeDecreasesWhenRemovingElements(){
         EXAMPLE_ELEMENTS.forEach(exampleElement -> this.queue.add(exampleElement));
         this.queue.remove();
-
         final int expectedSize = EXAMPLE_ELEMENTS.size() - 1;
-
         assertEquals(expectedSize, queue.size());
     }
 }
