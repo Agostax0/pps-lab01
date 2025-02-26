@@ -108,4 +108,15 @@ class MinMaxStackImplTest {
 
         assertEquals(maxValueAdded, this.stack.peek());
     }
+
+    @Test
+    public void peekingValueDoesNotDecreaseSize(){
+        final var exampleValues = generateExampleValues();
+        exampleValues.forEach( exampleValue -> this.stack.push(exampleValue));
+
+        this.stack.peek();
+
+        assertEquals(exampleValues.size(), this.stack.size());
+
+    }
 }
