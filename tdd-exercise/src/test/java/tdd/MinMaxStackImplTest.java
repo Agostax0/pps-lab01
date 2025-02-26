@@ -98,4 +98,14 @@ class MinMaxStackImplTest {
             this.stack.pop();
         }
     }
+
+    @Test
+    public void peekValueIsMax(){
+        final var exampleValues = generateExampleValues();
+        final int maxValueAdded = Collections.max(exampleValues);
+
+        exampleValues.forEach( exampleValue -> this.stack.push(exampleValue));
+
+        assertEquals(maxValueAdded, this.stack.peek());
+    }
 }

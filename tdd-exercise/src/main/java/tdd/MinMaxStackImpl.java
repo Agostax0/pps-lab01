@@ -35,7 +35,7 @@ public class MinMaxStackImpl implements MinMaxStack {
     public int peek() {
         checkEmptyStack();
 
-        return 0;
+        return this.stack.get(this.stack.size() - 1);
     }
 
     @Override
