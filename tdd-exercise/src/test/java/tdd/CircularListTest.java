@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -16,6 +17,7 @@ public class CircularListTest {
 
     private static final int QUEUE_INITIAL_SIZE = 0;
     private static final List<Integer> EXAMPLE_ELEMENTS = List.of(1,2,3,4,5,6,7,8,9,10);
+    private static final Random RANDOM = new Random();
     private CircularQueue queue;
 
     @BeforeEach
@@ -35,5 +37,17 @@ public class CircularListTest {
     public void sizeIncreasesWhenAddingElements(){
         EXAMPLE_ELEMENTS.forEach(exampleElement -> queue.add(exampleElement));
         assertEquals(EXAMPLE_ELEMENTS.size(), queue.size());
+    }
+
+    @Test
+    public void sizeDoesNotExceedFixedCapacity(){
+        int elementsAdded = 0;
+        while(elementsAdded <= CircularQueueImpl.MAX_CAPACITY + 1){
+            final var randomExampleElement = EXAMPLE_ELEMENTS.get(RANDOM.nextInt(EXAMPLE_ELEMENTS.size()));
+            this.queue.add(randomExampleElement);
+            elementsAdded++;
+        }
+
+        assertEquals(CircularQueueImpl.MAX_CAPACITY, this.queue.size());
     }
 }
