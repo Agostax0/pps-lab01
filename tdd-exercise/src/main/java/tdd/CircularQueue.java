@@ -18,4 +18,6 @@ public interface CircularQueue {
     boolean isEmpty();
 
     int size();
+
+    void add(int value);
 }
