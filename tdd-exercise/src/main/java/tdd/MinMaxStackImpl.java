@@ -49,7 +49,7 @@ public class MinMaxStackImpl implements MinMaxStack {
     public int getMax() {
         checkEmptyStack();
 
-        return 0;
+        return this.stack.get(this.stack.size() - 1);
     }
 
     @Override
