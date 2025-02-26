@@ -51,12 +51,11 @@ class MinMaxStackImplTest {
     }
 
     private ArrayList<Integer> generateExampleValues(){
-        final ArrayList<Integer> exampleValuesList = new ArrayList<>(
+        return new ArrayList<>(
                 List.of(
-                        3, 1, 4, 6, 2, 5, 8, 7, 10, 9
+                        3, 1, 1, 6, 2, 5, 8, 7, 10, 9
                 )
         );
-        return exampleValuesList;
     }
 
     @Test
@@ -84,5 +83,19 @@ class MinMaxStackImplTest {
         exampleValues.forEach( exampleValue -> this.stack.push(exampleValue));
 
         assertEquals(maxValueAdded, this.stack.pop());
+    }
+
+    @Test
+    public void poppingValuesDecreasesSize(){
+        final var exampleValues = generateExampleValues();
+        exampleValues.forEach( exampleValue -> this.stack.push(exampleValue));
+
+        int expectedSize = exampleValues.size();
+
+        while(expectedSize > 0){
+            assertEquals(expectedSize, this.stack.size());
+            expectedSize--;
+            this.stack.pop();
+        }
     }
 }
