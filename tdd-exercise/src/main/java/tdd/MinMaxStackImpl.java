@@ -3,7 +3,6 @@ package tdd;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Stack;
 
 public class MinMaxStackImpl implements MinMaxStack {
 
@@ -42,7 +41,7 @@ public class MinMaxStackImpl implements MinMaxStack {
     public int getMin() {
         checkEmptyStack();
 
-        return 0;
+        return this.stack.get(0);
     }
 
     @Override

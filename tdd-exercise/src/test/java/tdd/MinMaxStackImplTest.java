@@ -111,4 +111,12 @@ class MinMaxStackImplTest {
 
         assertEquals(maxValueAdded, this.stack.getMax());
     }
+
+    @Test
+    public void getMin(){
+        final int minValueAdded = Collections.min(EXAMPLE_VALUES);
+        fillStackWithExampleValues();
+
+        assertEquals(minValueAdded, this.stack.getMin());
+    }
 }
