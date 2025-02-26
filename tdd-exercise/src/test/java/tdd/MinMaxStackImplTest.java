@@ -60,7 +60,7 @@ class MinMaxStackImplTest {
     }
 
     @Test
-    public void pushingValuesChangesSize(){
+    public void pushingValuesIncreasesSize(){
         final var exampleValues = generateExampleValues();
 
         exampleValues.forEach( exampleValue -> this.stack.push(exampleValue));
