@@ -14,6 +14,11 @@ class MinMaxStackImplTest {
 
     private MinMaxStack stack;
     private static int INITIAL_SIZE = 0;
+    private static final List<Integer> EXAMPLE_VALUES = new ArrayList<>(
+            List.of(
+            3, 1, 1, 6, 2, 5, 8, 7, 10, 9
+            )
+    );
 
     @BeforeEach
     public void beforeEach(){
@@ -50,47 +55,33 @@ class MinMaxStackImplTest {
         assertThrows(IllegalStateException.class, () -> this.stack.getMax());
     }
 
-    private ArrayList<Integer> generateExampleValues(){
-        return new ArrayList<>(
-                List.of(
-                        3, 1, 1, 6, 2, 5, 8, 7, 10, 9
-                )
-        );
+    private void fillStackWithExampleValues() {
+        EXAMPLE_VALUES.forEach( exampleValue -> this.stack.push(exampleValue));
     }
 
     @Test
     public void pushingValuesIncreasesSize(){
-        final var exampleValues = generateExampleValues();
-
-        exampleValues.forEach( exampleValue -> this.stack.push(exampleValue));
-
-        assertEquals(exampleValues.size(), this.stack.size());
+        fillStackWithExampleValues();
+        assertEquals(EXAMPLE_VALUES.size(), this.stack.size());
     }
 
     @Test
     public void pushingValuesMeansNoLongerEmpty(){
-        final var exampleValues = generateExampleValues();
-        exampleValues.forEach( exampleValue -> this.stack.push(exampleValue));
-
+        fillStackWithExampleValues();
         assertFalse(this.stack.isEmpty());
     }
 
     @Test
     public void popValueIsMax(){
-        final var exampleValues = generateExampleValues();
-        final int maxValueAdded = Collections.max(exampleValues);
-
-        exampleValues.forEach( exampleValue -> this.stack.push(exampleValue));
-
+        final int maxValueAdded = Collections.max(EXAMPLE_VALUES);
+        fillStackWithExampleValues();
         assertEquals(maxValueAdded, this.stack.pop());
     }
 
     @Test
     public void poppingValuesDecreasesSize(){
-        final var exampleValues = generateExampleValues();
-        exampleValues.forEach( exampleValue -> this.stack.push(exampleValue));
-
-        int expectedSize = exampleValues.size();
+        fillStackWithExampleValues();
+        int expectedSize = EXAMPLE_VALUES.size();
 
         while(expectedSize > 0){
             assertEquals(expectedSize, this.stack.size());
@@ -101,22 +92,15 @@ class MinMaxStackImplTest {
 
     @Test
     public void peekValueIsMax(){
-        final var exampleValues = generateExampleValues();
-        final int maxValueAdded = Collections.max(exampleValues);
-
-        exampleValues.forEach( exampleValue -> this.stack.push(exampleValue));
-
+        final int maxValueAdded = Collections.max(EXAMPLE_VALUES);
+        fillStackWithExampleValues();
         assertEquals(maxValueAdded, this.stack.peek());
     }
 
     @Test
     public void peekingValueDoesNotDecreaseSize(){
-        final var exampleValues = generateExampleValues();
-        exampleValues.forEach( exampleValue -> this.stack.push(exampleValue));
-
+        fillStackWithExampleValues();
         this.stack.peek();
-
-        assertEquals(exampleValues.size(), this.stack.size());
-
+        assertEquals(EXAMPLE_VALUES.size(), this.stack.size());
     }
 }
