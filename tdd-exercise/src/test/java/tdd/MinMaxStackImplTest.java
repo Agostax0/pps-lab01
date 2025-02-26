@@ -75,4 +75,14 @@ class MinMaxStackImplTest {
 
         assertFalse(this.stack.isEmpty());
     }
+
+    @Test
+    public void popValueIsMax(){
+        final var exampleValues = generateExampleValues();
+        final int maxValueAdded = Collections.max(exampleValues);
+
+        exampleValues.forEach( exampleValue -> this.stack.push(exampleValue));
+
+        assertEquals(maxValueAdded, this.stack.pop());
+    }
 }

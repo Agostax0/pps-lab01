@@ -1,16 +1,20 @@
 package tdd;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Stack;
 
 public class MinMaxStackImpl implements MinMaxStack {
 
     private boolean empty = true;
 
-    Stack<Integer> stack = new Stack<>();
+    List<Integer> stack = new ArrayList<>();
 
     @Override
     public void push(int value) {
-        this.stack.push(value);
+        this.stack.add(value);
+        this.stack.sort(Comparator.naturalOrder());
     }
 
     private void checkEmptyStack() {
@@ -20,8 +24,7 @@ public class MinMaxStackImpl implements MinMaxStack {
     @Override
     public int pop() {
         checkEmptyStack();
-
-        return 0;
+        return this.stack.get(this.stack.size() - 1);
     }
 
     @Override
