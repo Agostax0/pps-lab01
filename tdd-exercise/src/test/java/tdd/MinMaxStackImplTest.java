@@ -13,14 +13,14 @@ import static org.junit.jupiter.api.Assertions.*;
 class MinMaxStackImplTest {
 
     private MinMaxStack stack;
-    private static int INITIAL_SIZE = 0;
+    private static final int INITIAL_SIZE = 0;
     private static final List<Integer> EXAMPLE_VALUES = new ArrayList<>(
             List.of(
             3, 1, 1, 6, 2, 5, 8, 7, 10, 9
             )
     );
     private final static int MAX_EXAMPLE_VALUE = Collections.max(EXAMPLE_VALUES);
-    private static int MIN_EXAMPLE_VALUE = Collections.min(EXAMPLE_VALUES);
+    private static final int MIN_EXAMPLE_VALUE = Collections.min(EXAMPLE_VALUES);
 
     @BeforeEach
     public void beforeEach(){
