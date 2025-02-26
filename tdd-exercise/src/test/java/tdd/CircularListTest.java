@@ -35,9 +35,13 @@ public class CircularListTest {
         assertEquals(QUEUE_INITIAL_SIZE, this.queue.size());
     }
 
+    private void fillQueue() {
+        EXAMPLE_ELEMENTS.forEach(exampleElement -> this.queue.add(exampleElement));
+    }
+
     @Test
     public void sizeIncreasesWhenAddingElements() {
-        EXAMPLE_ELEMENTS.forEach(exampleElement -> queue.add(exampleElement));
+        fillQueue();
         assertEquals(EXAMPLE_ELEMENTS.size(), queue.size());
     }
 
@@ -59,7 +63,7 @@ public class CircularListTest {
 
     @Test
     public void sizeDecreasesWhenRemovingElements(){
-        EXAMPLE_ELEMENTS.forEach(exampleElement -> this.queue.add(exampleElement));
+        fillQueue();
         this.queue.remove();
         final int expectedSize = EXAMPLE_ELEMENTS.size() - 1;
         assertEquals(expectedSize, queue.size());
