@@ -4,6 +4,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -49,14 +51,11 @@ class MinMaxStackImplTest {
     }
 
     private ArrayList<Integer> generateExampleValues(){
-        final Random random = new Random();
-        final int numberOfRandomValues = 10;
-        final int upperBoundOfRandomValues = 10;
-
-        final ArrayList<Integer> exampleValuesList = new ArrayList<>();
-        for(int count = 0; count < numberOfRandomValues; count++){
-            exampleValuesList.add(random.nextInt(upperBoundOfRandomValues));
-        }
+        final ArrayList<Integer> exampleValuesList = new ArrayList<>(
+                List.of(
+                        1, 3, 4, 6, 2, 5, 8, 7, 10, 9
+                )
+        );
         return exampleValuesList;
     }
 
