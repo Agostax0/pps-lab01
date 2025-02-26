@@ -29,8 +29,8 @@ public class MinMaxStackImpl implements MinMaxStack {
     public int pop() {
         checkEmptyStack();
 
-        var value = this.stack.get(this.stack.size() - 1);
-        this.stack.remove(this.stack.size()-1);
+        var value = this.stack.get(MAX_VALUE_INDEX);
+        this.stack.remove(MAX_VALUE_INDEX);
         this.updateMaxValueIndex();
 
         return value;
