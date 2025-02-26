@@ -68,4 +68,12 @@ class MinMaxStackImplTest {
 
         assertEquals(exampleValues.size(), this.stack.size());
     }
+
+    @Test
+    public void pushingValuesMeansNoLongerEmpty(){
+        final var exampleValues = generateExampleValues();
+        exampleValues.forEach( exampleValue -> this.stack.push(exampleValue));
+
+        assertFalse(this.stack.isEmpty());
+    }
 }
