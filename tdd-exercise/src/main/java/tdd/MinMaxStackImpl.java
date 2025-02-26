@@ -14,7 +14,7 @@ public class MinMaxStackImpl implements MinMaxStack {
     }
 
     private void checkEmptyStack() {
-        if(this.empty) throw new IllegalStateException();
+        if(this.isEmpty()) throw new IllegalStateException();
     }
 
     @Override

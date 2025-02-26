@@ -53,7 +53,7 @@ class MinMaxStackImplTest {
     private ArrayList<Integer> generateExampleValues(){
         final ArrayList<Integer> exampleValuesList = new ArrayList<>(
                 List.of(
-                        1, 3, 4, 6, 2, 5, 8, 7, 10, 9
+                        3, 1, 4, 6, 2, 5, 8, 7, 10, 9
                 )
         );
         return exampleValuesList;
