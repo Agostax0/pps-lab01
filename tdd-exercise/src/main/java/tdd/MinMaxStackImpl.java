@@ -1,12 +1,16 @@
 package tdd;
 
+import java.util.Stack;
+
 public class MinMaxStackImpl implements MinMaxStack {
 
     private boolean empty = true;
 
+    Stack<Integer> stack = new Stack<>();
+
     @Override
     public void push(int value) {
-
+        this.stack.push(value);
     }
 
     private void checkEmptyStack() {
@@ -48,6 +52,6 @@ public class MinMaxStackImpl implements MinMaxStack {
 
     @Override
     public int size() {
-        return 0;
+        return this.stack.size();
     }
 }
