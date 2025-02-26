@@ -4,11 +4,11 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.EmptyStackException;
 import java.util.List;
 import java.util.Random;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * The test suite for testing the CircularList implementation
@@ -16,12 +16,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class CircularListTest {
 
     private static final int QUEUE_INITIAL_SIZE = 0;
-    private static final List<Integer> EXAMPLE_ELEMENTS = List.of(1,2,3,4,5,6,7,8,9,10);
+    private static final List<Integer> EXAMPLE_ELEMENTS = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
     private static final Random RANDOM = new Random();
     private CircularQueue queue;
 
     @BeforeEach
-    public void beforeEach(){
+    public void beforeEach() {
         queue = new CircularQueueImpl();
     }
 
@@ -31,23 +31,30 @@ public class CircularListTest {
     }
 
     @Test
-    public void isSizeInitiallyZero(){assertEquals(QUEUE_INITIAL_SIZE, this.queue.size());}
+    public void isSizeInitiallyZero() {
+        assertEquals(QUEUE_INITIAL_SIZE, this.queue.size());
+    }
 
     @Test
-    public void sizeIncreasesWhenAddingElements(){
+    public void sizeIncreasesWhenAddingElements() {
         EXAMPLE_ELEMENTS.forEach(exampleElement -> queue.add(exampleElement));
         assertEquals(EXAMPLE_ELEMENTS.size(), queue.size());
     }
 
     @Test
-    public void sizeDoesNotExceedFixedCapacity(){
+    public void sizeDoesNotExceedFixedCapacity() {
         int elementsAdded = 0;
-        while(elementsAdded <= CircularQueueImpl.MAX_CAPACITY + 1){
+        while (elementsAdded <= CircularQueueImpl.MAX_CAPACITY + 1) {
             final var randomExampleElement = EXAMPLE_ELEMENTS.get(RANDOM.nextInt(EXAMPLE_ELEMENTS.size()));
             this.queue.add(randomExampleElement);
             elementsAdded++;
         }
 
         assertEquals(CircularQueueImpl.MAX_CAPACITY, this.queue.size());
+    }
+
+    @Test
+    public void cannotRemoveWhenQueueIsEmpty(){
+        assertThrows(IllegalStateException.class, () -> this.queue.remove());
     }
 }

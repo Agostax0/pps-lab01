@@ -20,4 +20,6 @@ public interface CircularQueue {
     int size();
 
     void add(int value);
+
+    void remove();
 }

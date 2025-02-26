@@ -24,4 +24,9 @@ public class CircularQueueImpl implements CircularQueue {
         if(this.queue.size() == MAX_CAPACITY) this.queue.remove(OLDEST_ELEMENT_INDEX);
         this.queue.add(value);
     }
+
+    @Override
+    public void remove() {
+        if(this.isEmpty()) throw new IllegalStateException();
+    }
 }
