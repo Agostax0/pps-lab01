@@ -6,14 +6,19 @@ import java.util.List;
 
 public class MinMaxStackImpl implements MinMaxStack {
 
-    private boolean empty = true;
-
     List<Integer> stack = new ArrayList<>();
+    private static final int MIN_VALUE_INDEX = 0;
+    private static int MAX_VALUE_INDEX = 0;
+
+    private void updateMaxValueIndex(){
+        MAX_VALUE_INDEX = this.stack.size()-1;
+    }
 
     @Override
     public void push(int value) {
         this.stack.add(value);
         this.stack.sort(Comparator.naturalOrder());
+        this.updateMaxValueIndex();
     }
 
     private void checkEmptyStack() {
@@ -26,6 +31,7 @@ public class MinMaxStackImpl implements MinMaxStack {
 
         var value = this.stack.get(this.stack.size() - 1);
         this.stack.remove(this.stack.size()-1);
+        this.updateMaxValueIndex();
 
         return value;
     }
@@ -33,22 +39,21 @@ public class MinMaxStackImpl implements MinMaxStack {
     @Override
     public int peek() {
         checkEmptyStack();
-
-        return this.stack.get(this.stack.size() - 1);
+        return this.stack.get(MAX_VALUE_INDEX);
     }
 
     @Override
     public int getMin() {
         checkEmptyStack();
 
-        return this.stack.get(0);
+        return this.stack.get(MIN_VALUE_INDEX);
     }
 
     @Override
     public int getMax() {
         checkEmptyStack();
 
-        return this.stack.get(this.stack.size() - 1);
+        return this.stack.get(MAX_VALUE_INDEX);
     }
 
     @Override
